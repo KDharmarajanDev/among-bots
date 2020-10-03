@@ -14,4 +14,6 @@ async def ping(ctx):
 async def on_command_error(ctx, error):
     await ctx.send(f'Error. Try .help ({error})')
 
+print('Started!')
+
 client.run(TOKEN)
