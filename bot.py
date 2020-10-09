@@ -13,6 +13,9 @@ async def ping(ctx):
 @client.event
 async def on_command_error(ctx, error):
     await ctx.send(f'Error. Try .help ({error})')
+    print('test')
+
+print('Started!')
 
 print('Started!')
 
