@@ -22,7 +22,7 @@ class AmongUsData(PlayerData):
         self.impostor_losses = impostor_losses
 
     def to_dict(self):
-        player_dict = PlayerData.toDict(self)
+        player_dict = PlayerData.to_dict(self)
         player_dict.update({
             'crew_mate_wins': self.crew_mate_wins,
             'crew_mate_losses': self.crew_mate_losses,
