@@ -42,6 +42,26 @@ async def impostorloss(ctx, *args):
     connection_manager.update_stats_user('AmongUs',PlayerData(ctx.message.author.id), data)
     await ctx.send(f'Your impostor loss amount is now {data.crew_mate_losses}.')
 
+@client.command(pass_context=True)
+async def getcrewwin(ctx, *args):
+    data = AmongUsData.from_dict(connection_manager.get_data('AmongUs', PlayerData(ctx.message.author.id)),ctx.message.author.id)
+    await ctx.send(f'Your crewmate win amount is {data.crew_mate_wins}.')
+
+@client.command(pass_context=True)
+async def getcrewloss(ctx, *args):
+    data = AmongUsData.from_dict(connection_manager.get_data('AmongUs', PlayerData(ctx.message.author.id)),ctx.message.author.id)
+    await ctx.send(f'Your crewmate loss amount is {data.crew_mate_losses}.')
+
+@client.command(pass_context=True)
+async def getimpostorwin(ctx, *args):
+    data = AmongUsData.from_dict(connection_manager.get_data('AmongUs', PlayerData(ctx.message.author.id)),ctx.message.author.id)
+    await ctx.send(f'Your impostor win amount is {data.impostor_wins}.')
+
+@client.command(pass_context=True)
+async def getimpostorloss(ctx, *args):
+    data = AmongUsData.from_dict(connection_manager.get_data('AmongUs', PlayerData(ctx.message.author.id)),ctx.message.author.id)
+    await ctx.send(f'Your impostor loss amount is {data.crew_mate_losses}.')
+
 #If there is an error, it will answer with an error
 @client.event
 async def on_command_error(ctx, error):
