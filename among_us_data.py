@@ -33,6 +33,8 @@ class AmongUsData(PlayerData):
 
     @classmethod
     def from_dict(cls, data, id=0):
+        if data == None:
+            return AmongUsData(id)
         return AmongUsData(data.get('id',id), data.get('crew_mate_wins',0), data.get('crew_mate_losses',0), data.get('impostor_wins',0), data.get('impostor_losses',0))
 
     def modify(self, statistic, change_mode, amount):
