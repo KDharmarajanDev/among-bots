@@ -16,7 +16,7 @@ async def ping(ctx):
 
 @client.command(pass_context=True)
 async def win(ctx, *args):
-    data = connection_manager.get_data('AmongUs',PlayerData(ctx.message.author.id))
+    data = connection_manager.get_data('AmongUs', PlayerData(ctx.message.author.id))
     if data != None:
         data['crew_mate_wins'] += 1
     else:
