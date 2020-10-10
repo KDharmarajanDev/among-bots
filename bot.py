@@ -8,13 +8,14 @@ client = commands.Bot(command_prefix = '.')
 connection_manager = database.ConnectionManager()
 
 #answers with the ms latency
-@bot.command(pass_context=True)
+@client.command(pass_context=True)
 async def ping(ctx):
     await ctx.send(f'Pong! {round (client.latency * 1000)}ms ')
 
-@bot.command(pass_context=True)
+@client.command(pass_context=True)
 async def send(ctx, args):
     connection_manager.set_stats({'user_id': ctx.message.author.id, 'args': args})
+    await ctx.send('Updated database!')
 
 #If there is an error, it will answer with an error
 @client.event
