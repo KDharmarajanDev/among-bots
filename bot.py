@@ -1,7 +1,9 @@
+import os
+import database
 import discord
 from discord.ext import commands
 
-TOKEN = open('token.txt','r').readline()
+TOKEN = os.environ.get('BOT_TOKEN')
 client = commands.Bot(command_prefix = '.')
 
 #answers with the ms latency
@@ -14,9 +16,5 @@ async def ping(ctx):
 async def on_command_error(ctx, error):
     await ctx.send(f'Error. Try .help ({error})')
     print('test')
-
-print('Started!')
-
-print('Started!')
 
 client.run(TOKEN)
