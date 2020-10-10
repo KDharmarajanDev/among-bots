@@ -9,11 +9,6 @@ class AmongUsData(PlayerData):
     CREW_LOSS = 2
     CREW_WIN = 3
 
-    # CHANGE MODES
-    INCREASE = 1
-    DECREASE = -1
-    SET_AMOUNT = 0
-
     def __init__(self, id, crew_mate_wins=0, crew_mate_losses=0, impostor_wins=0, impostor_losses=0):
         PlayerData.__init__(self, id)
         self.crew_mate_wins = crew_mate_wins
@@ -37,15 +32,25 @@ class AmongUsData(PlayerData):
             return AmongUsData(id)
         return AmongUsData(data.get('id',id), data.get('crew_mate_wins',0), data.get('crew_mate_losses',0), data.get('impostor_wins',0), data.get('impostor_losses',0))
 
-    def modify(self, statistic, change_mode, amount):
-        delta_change = change_mode * amount
-        if change_mode == AmongUsData.SET_AMOUNT:
-            delta_change = amount
+    def modify(self, statistic, change_function, amount):
         if statistic == AmongUsData.CREW_WIN:
-            self.crew_mate_wins += delta_change
+            self.crew_mate_wins = change_function(self.crew_mate_wins,amount)
         elif statistic == AmongUsData.CREW_LOSS:
-            self.crew_mate_losses += delta_change
+            self.crew_mate_losses = change_function(self.crew_mate_losses,amount)
         elif statistic == AmongUsData.IMPOSTOR_LOSS:
-            self.impostor_losses += delta_change
+            self.impostor_losses = change_function(self.impostor_losses,amount)
         elif statistic == AmongUsData.IMPOSTOR_WIN:
-            self.impostor_wins += delta_change
+            self.impostor_wins = change_function(self.impostor_wins,amount)
+
+    # Built-in Change Functions
+    @classmethod
+    def increase(cls, current, n):
+        return current + n
+    
+    @classmethod
+    def decrease(cls, current, n):
+        return current - n
+
+    @classmethod
+    def set_amount(cls, current, n):
+        return n
