@@ -16,13 +16,10 @@ async def ping(ctx):
 
 @client.command(pass_context=True)
 async def win(ctx, *args):
-    data = connection_manager.get_data('AmongUs', PlayerData(ctx.message.author.id))
-    if data != None:
-        data['crew_mate_wins'] += 1
-    else:
-        data = AmongUsData(ctx.message.author.id, 1).toDict()
+    data = AmongUsData.from_dict(connection_manager.get_data('AmongUs', PlayerData(ctx.message.author.id)),ctx.message.author.id)
+    data.modify(AmongUsData.CREW_WIN,AmongUsData.INCREASE,1)
     connection_manager.update_stats_user('AmongUs',PlayerData(ctx.message.author.id), data)
-    await ctx.send(f'Your win amount is now {data["crew_mate_wins"]}')
+    await ctx.send(f'Your crewmate win amount is now {data.crew_mate_wins}.')
 
 #If there is an error, it will answer with an error
 @client.event
