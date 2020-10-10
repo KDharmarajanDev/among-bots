@@ -14,6 +14,7 @@ async def ping(ctx):
 
 @client.command(pass_context=True)
 async def send(ctx, args):
+    await ctx.send({'user_id': ctx.message.author.id, 'args': str(args)})
     connection_manager.set_stats({'user_id': ctx.message.author.id, 'args': str(args)})
     await ctx.send('Updated database!')
 

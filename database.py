@@ -10,4 +10,4 @@ class ConnectionManager:
         return self.database.find_one({'user_id': user_id})
 
     def set_stats(self, send_object):
-        self.database.insert(send_object)
+        self.database.insert_one(send_object)
