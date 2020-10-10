@@ -7,7 +7,7 @@ class ConnectionManager:
         self.database = MongoClient(os.environ.get('DATABASE_CONNECTION_URI')).GameStats
 
     def update_stats_user(self, game, player_data, send_object):
-        self.database[game].update(player_data,send_object.toDict(),upsert=True)
+        self.database[game].update(player_data.toDict(),send_object.toDict(),upsert=True)
     
     def get_data(self, game, player_data):
         return self.database[game].find_one(player_data.toDict())
